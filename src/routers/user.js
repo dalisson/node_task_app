@@ -29,7 +29,6 @@ router.post('/users', async (req, res)=>{
         await user.save()
         res.status(201).send({user,token})
     }catch(e){
-        console.log(e)
         res.status(400).send(e)
 
     }
@@ -44,7 +43,7 @@ router.post('/users/login', async (req, res)=>{
         await user.save()
         res.send({user, token})
     }catch(err){
-        res.status(400).send(err)
+        res.status(400).send()
     }
 
 })
