@@ -21,6 +21,9 @@ const upload = multer({
 })
 
 const router = new express.Router()
+router.post('/', async (req, res)=>{
+    res.send('app working')
+})
 router.post('/users', async (req, res)=>{
     const user = new User(req.body)
     try{
