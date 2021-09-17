@@ -44,7 +44,7 @@ router.post('/users/login', async (req, res)=>{
         await user.save()
         res.send({user, token})
     }catch(err){
-        res.status(400).send()
+        res.status(400).send(err)
     }
 
 })
