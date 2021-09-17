@@ -27,12 +27,11 @@ router.get('/', async (req, res)=>{
 router.post('/users', async (req, res)=>{
     
     const user = new User(req.body)
-    res.send(user)
     try{
         //sendWelcomeMail(req.body.email, req.body.name)
-        //const token = await user.generateAuthToken()
+        const token = await user.generateAuthToken()
         //await user.save()
-        //res.status(201).send({user,token})
+        res.status(201).send({user,token})
     }catch(e){
         res.status(400).send(e)
 
