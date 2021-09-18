@@ -69,9 +69,9 @@ taskRouter.get('/tasks/:id', auth, async (req, res)=>{
 
 
 
-taskRouter.patch('/tasks/:id', async (req, res)=>{
+taskRouter.patch('/tasks/:id', auth, async (req, res)=>{
     const currentUpdates = Object.keys(req.body)
-    const allowedUpdates = ['description', 'complete']
+    const allowedUpdates = ['description', 'completed']
     const isAllowed = currentUpdates.every((value) =>{
         return allowedUpdates.includes(value)
     })
@@ -81,9 +81,9 @@ taskRouter.patch('/tasks/:id', async (req, res)=>{
 
     const _id = req.params.id
     try{
-        
-        const task = await Task.findOne({_id, owner : req.user._id})
-         
+
+        const task = await Task.findOne({_id:_id, owner:req.user._id})
+  
         if(!task){
             return res.status(404).send()
         }
@@ -96,7 +96,7 @@ taskRouter.patch('/tasks/:id', async (req, res)=>{
        
         res.send(task)
     }catch(err){
-        res.status(500).send()
+        res.status(500).send(err)
     }
 })
 
